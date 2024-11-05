@@ -18,15 +18,15 @@ class Inventario:
             print(f"Volumen restante: {volumenRestante} m³ a optimizar")
             print(f"Capacidad restante: {unidadesCapacidadRestante} Unidades a optimizar")
 
-            minimoCosto, maximaPrioridad, cantidainformacionProductosroducto= self.optimizarVolumenRestante(unidadesCapacidadRestante)
+            minimoCosto, maximaPrioridad, cantidadProductos= self.optimizarVolumenRestante(unidadesCapacidadRestante)
             print("\n==================Total Mes",mes,"==================\n")
 
             listaProducto = []
             for producto in self.productos:
                 volumenRequerido = producto.calcularMesVolumenTotal(mes)
                 volumenRequerido = round(volumenRequerido, 3)
-                print(f"producto: {producto.nombre}", round(((cantidainformacionProductosroducto[self.productos.index(producto)])*producto.volumen),3),"m³")
-                print(f"=======>",(cantidainformacionProductosroducto[self.productos.index(producto)]),"Unidades de ",producto.nombre )
+                print(f"producto: {producto.nombre}", round(((cantidadProductos[self.productos.index(producto)])*producto.volumen),3),"m³")
+                print(f"=======>",(cantidadProductos[self.productos.index(producto)]),"Unidades de ",producto.nombre )
 
     def calcularMesVolumenTotal(self, mes):
         volumenTotal = 0
@@ -37,11 +37,11 @@ class Inventario:
         return volumenTotal
 
     def optimizarVolumenRestante(self, unidadesCapacidadRestante):
-        minimoCosto, maximaPrioridad, cantidainformacionProductosroducto = self.optimizarBodega(unidadesCapacidadRestante, self.obtenerListaTuplas())
+        minimoCosto, maximaPrioridad, cantidadProductos = self.optimizarBodega(unidadesCapacidadRestante, self.obtenerListaTuplas())
         print("Mínimo costo para optimizar volúmen:", minimoCosto)
         print("Máxima prioridad:", maximaPrioridad)
-        print("Cantidad de cada producto:", cantidainformacionProductosroducto)
-        return minimoCosto, maximaPrioridad, cantidainformacionProductosroducto
+        print("Cantidad de cada producto:", cantidadProductos)
+        return minimoCosto, maximaPrioridad, cantidadProductos
 
 
     def optimizarBodega(self, capacidadUnidades, listaProductos):
@@ -67,9 +67,9 @@ class Inventario:
                     almacenarContadorProductos[v][index] += 1
 
         minimoCosto, maximaPrioridad = informacionProductos[capacidadUnidades]
-        cantidainformacionProductosroducto = almacenarContadorProductos[capacidadUnidades]
+        cantidadProductos = almacenarContadorProductos[capacidadUnidades]
 
-        return minimoCosto, maximaPrioridad, cantidainformacionProductosroducto
+        return minimoCosto, maximaPrioridad, cantidadProductos
 
     def obtenerVolumenMenor(self):
         producto_menor_volumen = min(self.productos, key=lambda p: p.volumen)
