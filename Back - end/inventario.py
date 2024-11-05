@@ -72,8 +72,8 @@ class Inventario:
         return minimoCosto, maximaPrioridad, cantidadProductos
 
     def obtenerVolumenMenor(self):
-        producto_menor_volumen = min(self.productos, key=lambda p: p.volumen)
-        return producto_menor_volumen.volumen
+        productoVolumenMenor = min(self.productos, key=lambda p: p.volumen)
+        return productoVolumenMenor.volumen
 
     def obtenerListaTuplas(self):
         return [(producto.precio, producto.prioridad, int((producto.volumen) / self.obtenerVolumenMenor() * 10)) for producto in self.productos]
