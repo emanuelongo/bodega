@@ -32,6 +32,7 @@ class Inventario:
         volumenTotal = 0
         for producto in self.productos:
             volumenRequerido = producto.calcularMesVolumenTotal(mes)
+            print(f"{producto.nombre} -> Unidades con consumo y crecimiento = {producto.calcularConsumoMinimo(mes) + producto.inventarioMinimo}")
             volumenTotal += volumenRequerido
             print(f"{producto.nombre} -> Volumen total con consumo y almacenamiento fijo = {volumenRequerido:.3f} m³")
         return volumenTotal

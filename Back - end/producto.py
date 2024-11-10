@@ -8,6 +8,9 @@ class Producto:
         self.prioridad = prioridad
         self.almacenamientoFijo = 0.25
 
+    def calcularConsumoMinimo(self, mes):
+        return self.consumoPromedio * (1.2 ** (mes - 1))
+
     def calcularMinimoConsumo(self, mes):
         return self.consumoPromedio * (1.2 ** (mes - 1)) * self.volumen
 
